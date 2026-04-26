@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Huntsville Welcome Guide | Local Vendors for New Residents</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f5f0;
+      color: #1f2933;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e0d8;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #174ea6;
+    }
+
+    .logo span {
+      color: #e07a2f;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: #3b4652;
+      font-weight: 600;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #174ea6;
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #0f3a7a;
+    }
+
+    .btn-secondary {
+      background: #fff3e8;
+      color: #b45309;
+    }
+
+    .hero {
+      padding: 82px 0 70px;
+      background: linear-gradient(135deg, #ffffff 0%, #f2f7ff 52%, #fff3e8 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: #e07a2f;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      color: #102a43;
+    }
+
+    .hero p {
+      font-size: 1.12rem;
+      color: #52606d;
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .trust-row {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: #52606d;
+      font-size: 0.95rem;
+    }
+
+    .trust-row strong {
+      color: #102a43;
+    }
+
+    .hero-card {
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(23, 78, 166, 0.14);
+      border: 1px solid #e6edf7;
+    }
+
+    .search-box {
+      background: #f8fafc;
+      border: 1px solid #d9e2ec;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .search-box label {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #102a43;
+    }
+
+    .search-box input,
+    .search-box select,
+    .form-card input,
+    .form-card select,
+    .form-card textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      background: #ffffff;
+    }
+
+    .quick-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .quick-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px;
+      border-radius: 16px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+    }
+
+    .quick-item span:first-child {
+      font-weight: 800;
+      color: #102a43;
+    }
+
+    .badge {
+      background: #e8f0fe;
+      color: #174ea6;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 38px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #102a43;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: #52606d;
+      font-size: 1.05rem;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .category-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      transition: 0.2s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.09);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: #fff3e8;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    .category-card h3 {
+      color: #102a43;
+      margin-bottom: 8px;
+    }
+
+    .category-card p {
+      color: #52606d;
+      font-size: 0.95rem;
+    }
+
+    .featured {
+      background: #ffffff;
+    }
+
+    .vendor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .vendor-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
+    }
+
+    .vendor-top {
+      min-height: 120px;
+      background: linear-gradient(135deg, #174ea6, #2563eb);
+      color: #ffffff;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .vendor-top.orange {
+      background: linear-gradient(135deg, #b45309, #e07a2f);
+    }
+
+    .vendor-top.green {
+      background: linear-gradient(135deg, #047857, #10b981);
+    }
+
+    .vendor-top small {
+      font-weight: 800;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .vendor-top h3 {
+      font-size: 1.45rem;
+    }
+
+    .vendor-body {
+      padding: 22px;
+    }
+
+    .vendor-body p {
+      color: #52606d;
+      margin-bottom: 18px;
+    }
+
+    .vendor-meta {
+      display: grid;
+      gap: 8px;
+      font-size: 0.92rem;
+      color: #3b4652;
+      margin-bottom: 18px;
+    }
+
+    .vendor-meta strong {
+      color: #102a43;
+    }
+
+    .sponsored-tag {
+      display: inline-block;
+      background: #fff7ed;
+      color: #b45309;
+      border: 1px solid #fed7aa;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .how-it-works {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .step {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 26px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: #174ea6;
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      color: #102a43;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: #52606d;
+    }
+
+    .vendor-cta {
+      background: #102a43;
+      color: #ffffff;
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 38px;
+      align-items: center;
+    }
+
+    .vendor-cta h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 16px;
+    }
+
+    .vendor-cta p {
+      color: #d9e2ec;
+      margin-bottom: 22px;
+      font-size: 1.05rem;
+    }
+
+    .pricing-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .pricing-list div {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+      padding: 15px;
+    }
+
+    .form-card {
+      background: #ffffff;
+      color: #102a43;
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .form-card p {
+      color: #52606d;
+      margin-bottom: 18px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    footer {
+      background: #071a2f;
+      color: #d9e2ec;
+      padding: 30px 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .categories,
+      .vendor-grid,
+      .how-it-works {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .categories,
+      .vendor-grid,
+      .how-it-works {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 54px 0;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">Huntsville<span>Welcome</span></a>
+      <nav class="nav-links">
+        <a href="#categories">Categories</a>
+        <a href="#featured">Featured Vendors</a>
+        <a href="#how">How It Works</a>
+        <a href="#vendors" class="btn btn-primary">List Your Business</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Moving to Huntsville made easier</div>
+          <h1>Find trusted local vendors before the boxes are unpacked.</h1>
+          <p>Huntsville Welcome helps new residents quickly find local cleaners, movers, storage units, lawn care, handymen, utility help, and other services they need during their first few weeks in town.</p>
+          <div class="hero-actions">
+            <a href="#categories" class="btn btn-primary">Browse Vendors</a>
+            <a href="#vendors" class="btn btn-secondary">Get Your Business Listed</a>
+          </div>
+          <div class="trust-row">
+            <span><strong>Local</strong> Huntsville-area vendors</span>
+            <span><strong>Simple</strong> category search</span>
+            <span><strong>Built for</strong> new residents</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="search-box">
+            <label for="search">What do you need help with?</label>
+            <input id="search" type="text" placeholder="Search cleaners, storage, movers..." />
+            <select>
+              <option>Select a category</option>
+              <option>Home Cleaning</option>
+              <option>Moving Services</option>
+              <option>Storage Units</option>
+              <option>Lawn Care</option>
+              <option>Handyman Services</option>
+              <option>Pet Services</option>
+            </select>
+            <a href="#featured" class="btn btn-primary" style="width:100%; text-align:center;">Find Vendors</a>
+          </div>
+
+          <div class="quick-list">
+            <div class="quick-item"><span>Home Cleaning</span><span class="badge">12 vendors</span></div>
+            <div class="quick-item"><span>Storage</span><span class="badge">8 vendors</span></div>
+            <div class="quick-item"><span>Moving Help</span><span class="badge">15 vendors</span></div>
+            <div class="quick-item"><span>Lawn Care</span><span class="badge">10 vendors</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="categories">
+      <div class="container">
+        <div class="section-header">
+          <h2>Popular categories for new residents</h2>
+          <p>Start with the services people usually need first when moving into Huntsville, Madison, Meridianville, Harvest, Hampton Cove, and surrounding areas.</p>
+        </div>
+
+        <div class="categories">
+          <div class="category-card">
+            <div class="icon">🧹</div>
+            <h3>Cleaners</h3>
+            <p>Move-in cleaning, recurring house cleaning, deep cleans, and apartment turn services.</p>
+          </div>
+          <div class="category-card">
+            <div class="icon">🚚</div>
+            <h3>Movers</h3>
+            <p>Local movers, loading help, unloading help, and furniture delivery support.</p>
+          </div>
+          <div class="category-card">
+            <div class="icon">📦</div>
+            <h3>Storage</h3>
+            <p>Short-term and long-term storage options while settling into a new home.</p>
+          </div>
+          <div class="category-card">
+            <div class="icon">🌱</div>
+            <h3>Lawn Care</h3>
+            <p>Mowing, landscaping, seasonal cleanup, pressure washing, and yard maintenance.</p>
+          </div>
+          <div class="category-card">
+            <div class="icon">🔧</div>
+            <h3>Handyman</h3>
+            <p>Small repairs, furniture assembly, TV mounting, fixtures, and home projects.</p>
+          </div>
+          <div class="category-card">
+            <div class="icon">🐾</div>
+            <h3>Pet Services</h3>
+            <p>Dog walkers, boarding, grooming, pet sitters, and local veterinary resources.</p>
+          </div>
+          <div class="category-card">
+            <div class="icon">🔌</div>
+            <h3>Utilities & Setup</h3>
+            <p>Internet, utilities, security systems, smart-home setup, and local service providers.</p>
+          </div>
+          <div class="category-card">
+            <div class="icon">🏠</div>
+            <h3>Home Services</h3>
+            <p>Pest control, HVAC, plumbing, roofing, painting, and other homeowner needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured" id="featured">
+      <div class="container">
+        <div class="section-header">
+          <h2>Featured local vendors</h2>
+          <p>Use this section for promoted vendors. You can start with free listings, then charge for featured placement, category priority, or lead generation.</p>
+        </div>
+
+        <div class="vendor-grid">
+          <div class="vendor-card">
+            <div class="vendor-top">
+              <small>Featured Cleaner</small>
+              <h3>Rocket City Clean Co.</h3>
+            </div>
+            <div class="vendor-body">
+              <span class="sponsored-tag">Promoted Listing</span>
+              <p>Move-in and deep cleaning services for homes, apartments, and short-term rentals.</p>
+              <div class="vendor-meta">
+                <span><strong>Service Area:</strong> Huntsville, Madison, Harvest</span>
+                <span><strong>Best For:</strong> Move-in cleaning</span>
+                <span><strong>Contact:</strong> (256) 555-0148</span>
+              </div>
+              <a href="#" class="btn btn-primary">View Vendor</a>
+            </div>
+          </div>
+
+          <div class="vendor-card">
+            <div class="vendor-top orange">
+              <small>Featured Storage</small>
+              <h3>North Alabama Storage</h3>
+            </div>
+            <div class="vendor-body">
+              <span class="sponsored-tag">Promoted Listing</span>
+              <p>Climate-controlled storage units and flexible options for new residents.</p>
+              <div class="vendor-meta">
+                <span><strong>Service Area:</strong> Huntsville, Meridianville</span>
+                <span><strong>Best For:</strong> Short-term storage</span>
+                <span><strong>Contact:</strong> (256) 555-0192</span>
+              </div>
+              <a href="#" class="btn btn-primary">View Vendor</a>
+            </div>
+          </div>
+
+          <div class="vendor-card">
+            <div class="vendor-top green">
+              <small>Featured Lawn Care</small>
+              <h3>Valley Lawn Pros</h3>
+            </div>
+            <div class="vendor-body">
+              <span class="sponsored-tag">Promoted Listing</span>
+              <p>Weekly mowing, edging, yard cleanup, and curb appeal packages for homeowners.</p>
+              <div class="vendor-meta">
+                <span><strong>Service Area:</strong> Huntsville, Madison, Hazel Green</span>
+                <span><strong>Best For:</strong> Recurring lawn care</span>
+                <span><strong>Contact:</strong> (256) 555-0127</span>
+              </div>
+              <a href="#" class="btn btn-primary">View Vendor</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <div class="section-header">
+          <h2>How the directory works</h2>
+          <p>Keep the user experience simple for residents while giving vendors a clear reason to pay later.</p>
+        </div>
+
+        <div class="how-it-works">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Residents choose a category</h3>
+            <p>New people moving to Huntsville can quickly browse the most common services they need after moving.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Vendors get visibility</h3>
+            <p>Local vendors receive exposure to people who are actively looking for services and ready to spend.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>You monetize placement</h3>
+            <p>After building traffic, offer paid featured listings, premium category placement, and lead packages.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vendor-cta" id="vendors">
+      <div class="container cta-grid">
+        <div>
+          <div class="eyebrow">For local businesses</div>
+          <h2>Want your business in front of new Huntsville residents?</h2>
+          <p>Join the directory while early listings are free. As the site grows, vendors can upgrade to promoted placement, featured profiles, and direct lead opportunities.</p>
+          <div class="pricing-list">
+            <div><strong>Free Starter Listing:</strong> Business name, category, phone, and service area.</div>
+            <div><strong>Featured Listing:</strong> Higher placement, logo, description, and call-to-action button.</div>
+            <div><strong>Premium Partner:</strong> Homepage feature, category priority, and monthly lead reporting.</div>
+          </div>
+        </div>
+
+        <form class="form-card">
+          <h3>Request a vendor listing</h3>
+          <p>Use this form as a placeholder. Later, connect it to Mailchimp, Airtable, Google Sheets, or a CRM.</p>
+          <input type="text" placeholder="Business name" />
+          <input type="text" placeholder="Contact name" />
+          <input type="email" placeholder="Email address" />
+          <input type="tel" placeholder="Phone number" />
+          <select>
+            <option>Select business category</option>
+            <option>Cleaning</option>
+            <option>Moving</option>
+            <option>Storage</option>
+            <option>Lawn Care</option>
+            <option>Handyman</option>
+            <option>Pet Services</option>
+            <option>Other</option>
+          </select>
+          <textarea placeholder="Tell us what areas you serve and what makes your business a good fit for new residents."></textarea>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Submit Listing Request</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Huntsville Welcome Guide. Built to connect new residents with trusted local businesses.</p>
+    </div>
+  </footer>
+</body>
+</html>
