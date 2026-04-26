@@ -168,6 +168,8 @@
 
     .search-box input,
     .search-box select,
+    .filter-row input,
+    .filter-row select,
     .form-card input,
     .form-card select,
     .form-card textarea {
@@ -275,6 +277,13 @@
       background: #ffffff;
     }
 
+    .filter-row {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
     .vendor-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -305,6 +314,10 @@
 
     .vendor-top.green {
       background: linear-gradient(135deg, #047857, #10b981);
+    }
+
+    .vendor-top.gray {
+      background: linear-gradient(135deg, #475569, #64748b);
     }
 
     .vendor-top small {
@@ -339,16 +352,42 @@
       color: #102a43;
     }
 
-    .sponsored-tag {
+    .sponsored-tag,
+    .standard-tag {
       display: inline-block;
-      background: #fff7ed;
-      color: #b45309;
-      border: 1px solid #fed7aa;
       border-radius: 999px;
       padding: 6px 10px;
       font-size: 0.78rem;
       font-weight: 800;
       margin-bottom: 12px;
+    }
+
+    .sponsored-tag {
+      background: #fff7ed;
+      color: #b45309;
+      border: 1px solid #fed7aa;
+    }
+
+    .standard-tag {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+
+    .loading-message,
+    .error-message {
+      grid-column: 1 / -1;
+      padding: 18px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid #d9e2ec;
+      color: #52606d;
+    }
+
+    .error-message {
+      background: #fff1f2;
+      border-color: #fecdd3;
+      color: #9f1239;
     }
 
     .how-it-works {
@@ -472,7 +511,8 @@
     @media (max-width: 640px) {
       .categories,
       .vendor-grid,
-      .how-it-works {
+      .how-it-works,
+      .filter-row {
         grid-template-columns: 1fr;
       }
 
@@ -501,7 +541,7 @@
       <a href="#" class="logo">Huntsville<span>Welcome</span></a>
       <nav class="nav-links">
         <a href="#categories">Categories</a>
-        <a href="#featured">Featured Vendors</a>
+        <a href="#featured">Vendors</a>
         <a href="#how">How It Works</a>
         <a href="#vendors" class="btn btn-primary">List Your Business</a>
       </nav>
@@ -516,7 +556,7 @@
           <h1>Find trusted local vendors before the boxes are unpacked.</h1>
           <p>Huntsville Welcome helps new residents quickly find local cleaners, movers, storage units, lawn care, handymen, utility help, and other services they need during their first few weeks in town.</p>
           <div class="hero-actions">
-            <a href="#categories" class="btn btn-primary">Browse Vendors</a>
+            <a href="#featured" class="btn btn-primary">Browse Vendors</a>
             <a href="#vendors" class="btn btn-secondary">Get Your Business Listed</a>
           </div>
           <div class="trust-row">
@@ -528,25 +568,16 @@
 
         <div class="hero-card">
           <div class="search-box">
-            <label for="search">What do you need help with?</label>
-            <input id="search" type="text" placeholder="Search cleaners, storage, movers..." />
-            <select>
-              <option>Select a category</option>
-              <option>Home Cleaning</option>
-              <option>Moving Services</option>
-              <option>Storage Units</option>
-              <option>Lawn Care</option>
-              <option>Handyman Services</option>
-              <option>Pet Services</option>
+            <label for="heroSearch">What do you need help with?</label>
+            <input id="heroSearch" type="text" placeholder="Search cleaners, storage, movers..." />
+            <select id="heroCategory">
+              <option value="All">Select a category</option>
             </select>
             <a href="#featured" class="btn btn-primary" style="width:100%; text-align:center;">Find Vendors</a>
           </div>
 
-          <div class="quick-list">
-            <div class="quick-item"><span>Home Cleaning</span><span class="badge">12 vendors</span></div>
-            <div class="quick-item"><span>Storage</span><span class="badge">8 vendors</span></div>
-            <div class="quick-item"><span>Moving Help</span><span class="badge">15 vendors</span></div>
-            <div class="quick-item"><span>Lawn Care</span><span class="badge">10 vendors</span></div>
+          <div class="quick-list" id="quickCategoryList">
+            <div class="loading-message">Loading categories...</div>
           </div>
         </div>
       </div>
@@ -559,109 +590,26 @@
           <p>Start with the services people usually need first when moving into Huntsville, Madison, Meridianville, Harvest, Hampton Cove, and surrounding areas.</p>
         </div>
 
-        <div class="categories">
-          <div class="category-card">
-            <div class="icon">🧹</div>
-            <h3>Cleaners</h3>
-            <p>Move-in cleaning, recurring house cleaning, deep cleans, and apartment turn services.</p>
-          </div>
-          <div class="category-card">
-            <div class="icon">🚚</div>
-            <h3>Movers</h3>
-            <p>Local movers, loading help, unloading help, and furniture delivery support.</p>
-          </div>
-          <div class="category-card">
-            <div class="icon">📦</div>
-            <h3>Storage</h3>
-            <p>Short-term and long-term storage options while settling into a new home.</p>
-          </div>
-          <div class="category-card">
-            <div class="icon">🌱</div>
-            <h3>Lawn Care</h3>
-            <p>Mowing, landscaping, seasonal cleanup, pressure washing, and yard maintenance.</p>
-          </div>
-          <div class="category-card">
-            <div class="icon">🔧</div>
-            <h3>Handyman</h3>
-            <p>Small repairs, furniture assembly, TV mounting, fixtures, and home projects.</p>
-          </div>
-          <div class="category-card">
-            <div class="icon">🐾</div>
-            <h3>Pet Services</h3>
-            <p>Dog walkers, boarding, grooming, pet sitters, and local veterinary resources.</p>
-          </div>
-          <div class="category-card">
-            <div class="icon">🔌</div>
-            <h3>Utilities & Setup</h3>
-            <p>Internet, utilities, security systems, smart-home setup, and local service providers.</p>
-          </div>
-          <div class="category-card">
-            <div class="icon">🏠</div>
-            <h3>Home Services</h3>
-            <p>Pest control, HVAC, plumbing, roofing, painting, and other homeowner needs.</p>
-          </div>
-        </div>
+        <div class="categories" id="categoryCards"></div>
       </div>
     </section>
 
     <section class="featured" id="featured">
       <div class="container">
         <div class="section-header">
-          <h2>Featured local vendors</h2>
-          <p>Use this section for promoted vendors. You can start with free listings, then charge for featured placement, category priority, or lead generation.</p>
+          <h2>Local vendor directory</h2>
+          <p>Featured vendors appear first. Update Airtable and this section updates automatically after deploy/cache refresh.</p>
         </div>
 
-        <div class="vendor-grid">
-          <div class="vendor-card">
-            <div class="vendor-top">
-              <small>Featured Cleaner</small>
-              <h3>Rocket City Clean Co.</h3>
-            </div>
-            <div class="vendor-body">
-              <span class="sponsored-tag">Promoted Listing</span>
-              <p>Move-in and deep cleaning services for homes, apartments, and short-term rentals.</p>
-              <div class="vendor-meta">
-                <span><strong>Service Area:</strong> Huntsville, Madison, Harvest</span>
-                <span><strong>Best For:</strong> Move-in cleaning</span>
-                <span><strong>Contact:</strong> (256) 555-0148</span>
-              </div>
-              <a href="#" class="btn btn-primary">View Vendor</a>
-            </div>
-          </div>
+        <div class="filter-row">
+          <input id="vendorSearch" type="text" placeholder="Search by business name, category, or city..." />
+          <select id="vendorCategoryFilter">
+            <option value="All">All categories</option>
+          </select>
+        </div>
 
-          <div class="vendor-card">
-            <div class="vendor-top orange">
-              <small>Featured Storage</small>
-              <h3>North Alabama Storage</h3>
-            </div>
-            <div class="vendor-body">
-              <span class="sponsored-tag">Promoted Listing</span>
-              <p>Climate-controlled storage units and flexible options for new residents.</p>
-              <div class="vendor-meta">
-                <span><strong>Service Area:</strong> Huntsville, Meridianville</span>
-                <span><strong>Best For:</strong> Short-term storage</span>
-                <span><strong>Contact:</strong> (256) 555-0192</span>
-              </div>
-              <a href="#" class="btn btn-primary">View Vendor</a>
-            </div>
-          </div>
-
-          <div class="vendor-card">
-            <div class="vendor-top green">
-              <small>Featured Lawn Care</small>
-              <h3>Valley Lawn Pros</h3>
-            </div>
-            <div class="vendor-body">
-              <span class="sponsored-tag">Promoted Listing</span>
-              <p>Weekly mowing, edging, yard cleanup, and curb appeal packages for homeowners.</p>
-              <div class="vendor-meta">
-                <span><strong>Service Area:</strong> Huntsville, Madison, Hazel Green</span>
-                <span><strong>Best For:</strong> Recurring lawn care</span>
-                <span><strong>Contact:</strong> (256) 555-0127</span>
-              </div>
-              <a href="#" class="btn btn-primary">View Vendor</a>
-            </div>
-          </div>
+        <div class="vendor-grid" id="vendorGrid">
+          <div class="loading-message">Loading vendors...</div>
         </div>
       </div>
     </section>
@@ -708,7 +656,7 @@
 
         <form class="form-card">
           <h3>Request a vendor listing</h3>
-          <p>Use this form as a placeholder. Later, connect it to Mailchimp, Airtable, Google Sheets, or a CRM.</p>
+          <p>Use this form as a placeholder. Later, connect it to Tally, Airtable, Google Sheets, Mailchimp, or a CRM.</p>
           <input type="text" placeholder="Business name" />
           <input type="text" placeholder="Contact name" />
           <input type="email" placeholder="Email address" />
@@ -735,5 +683,186 @@
       <p>&copy; 2026 Huntsville Welcome Guide. Built to connect new residents with trusted local businesses.</p>
     </div>
   </footer>
+
+  <script>
+    const categories = [
+      {
+        name: "Cleaning",
+        icon: "🧹",
+        description: "Move-in cleaning, recurring house cleaning, deep cleans, and apartment turn services."
+      },
+      {
+        name: "Moving",
+        icon: "🚚",
+        description: "Local movers, loading help, unloading help, and furniture delivery support."
+      },
+      {
+        name: "Storage",
+        icon: "📦",
+        description: "Short-term and long-term storage options while settling into a new home."
+      },
+      {
+        name: "Lawn Care",
+        icon: "🌱",
+        description: "Mowing, landscaping, seasonal cleanup, pressure washing, and yard maintenance."
+      },
+      {
+        name: "Handyman",
+        icon: "🔧",
+        description: "Small repairs, furniture assembly, TV mounting, fixtures, and home projects."
+      },
+      {
+        name: "Pet Services",
+        icon: "🐾",
+        description: "Dog walkers, boarding, grooming, pet sitters, and local veterinary resources."
+      },
+      {
+        name: "Utilities & Setup",
+        icon: "🔌",
+        description: "Internet, utilities, security systems, smart-home setup, and local service providers."
+      },
+      {
+        name: "Home Services",
+        icon: "🏠",
+        description: "Pest control, HVAC, plumbing, roofing, painting, and other homeowner needs."
+      },
+      {
+        name: "HVAC",
+        icon: "❄️",
+        description: "Heating, cooling, maintenance, and repair services for homeowners and renters."
+      }
+    ];
+
+    let vendors = [];
+
+    const categoryCards = document.getElementById("categoryCards");
+    const quickCategoryList = document.getElementById("quickCategoryList");
+    const vendorGrid = document.getElementById("vendorGrid");
+    const vendorSearch = document.getElementById("vendorSearch");
+    const vendorCategoryFilter = document.getElementById("vendorCategoryFilter");
+    const heroCategory = document.getElementById("heroCategory");
+    const heroSearch = document.getElementById("heroSearch");
+
+    function getCategoryCount(categoryName) {
+      return vendors.filter(vendor => vendor.category === categoryName).length;
+    }
+
+    function renderCategories() {
+      categoryCards.innerHTML = categories.map(category => `
+        <div class="category-card">
+          <div class="icon">${category.icon}</div>
+          <h3>${category.name}</h3>
+          <p>${category.description}</p>
+        </div>
+      `).join("");
+
+      quickCategoryList.innerHTML = categories.slice(0, 4).map(category => `
+        <div class="quick-item">
+          <span>${category.name}</span>
+          <span class="badge">${getCategoryCount(category.name)} vendors</span>
+        </div>
+      `).join("");
+    }
+
+    function populateCategoryFilters() {
+      const options = categories.map(category => `<option value="${category.name}">${category.name}</option>`).join("");
+      vendorCategoryFilter.innerHTML = `<option value="All">All categories</option>${options}`;
+      heroCategory.innerHTML = `<option value="All">Select a category</option>${options}`;
+    }
+
+    function renderVendors() {
+      const searchTerm = vendorSearch.value.toLowerCase();
+      const selectedCategory = vendorCategoryFilter.value;
+
+      const filteredVendors = vendors
+        .filter(vendor => selectedCategory === "All" || vendor.category === selectedCategory)
+        .filter(vendor => {
+          const searchableText = `${vendor.name || ""} ${vendor.category || ""} ${vendor.description || ""} ${vendor.serviceArea || ""} ${vendor.bestFor || ""}`.toLowerCase();
+          return searchableText.includes(searchTerm);
+        })
+        .sort((a, b) => Number(b.featured) - Number(a.featured));
+
+      if (filteredVendors.length === 0) {
+        vendorGrid.innerHTML = `<p class="loading-message">No vendors found. Try another search or category.</p>`;
+        return;
+      }
+
+      vendorGrid.innerHTML = filteredVendors.map((vendor, index) => {
+        const colorClass = vendor.featured
+          ? index % 3 === 1 ? "orange" : index % 3 === 2 ? "green" : ""
+          : "gray";
+
+        return `
+          <div class="vendor-card">
+            <div class="vendor-top ${colorClass}">
+              <small>${vendor.featured ? "Featured Vendor" : vendor.category || "Local Vendor"}</small>
+              <h3>${vendor.name || "Unnamed Vendor"}</h3>
+            </div>
+            <div class="vendor-body">
+              <span class="${vendor.featured ? "sponsored-tag" : "standard-tag"}">${vendor.featured ? "Promoted Listing" : "Standard Listing"}</span>
+              <p>${vendor.description || "Local service provider serving the greater Huntsville area."}</p>
+              <div class="vendor-meta">
+                <span><strong>Category:</strong> ${vendor.category || "Not listed"}</span>
+                <span><strong>Service Area:</strong> ${vendor.serviceArea || "Greater Huntsville area"}</span>
+                <span><strong>Contact:</strong> ${vendor.phone || "Contact vendor directly"}</span>
+              </div>
+              <a href="${vendor.website && vendor.website !== "#" ? vendor.website : "#"}" class="btn btn-primary" target="${vendor.website && vendor.website !== "#" ? "_blank" : "_self"}" rel="noopener">View Vendor</a>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    async function loadVendors() {
+      try {
+        vendorGrid.innerHTML = `<div class="loading-message">Loading vendors from Airtable...</div>`;
+
+        const response = await fetch("/.netlify/functions/vendors");
+
+        if (!response.ok) {
+          throw new Error("Vendor function returned an error");
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error("Vendor data was not returned as a list");
+        }
+
+        vendors = data;
+
+        renderCategories();
+        populateCategoryFilters();
+        renderVendors();
+      } catch (error) {
+        console.error(error);
+        renderCategories();
+        populateCategoryFilters();
+        vendorGrid.innerHTML = `
+          <div class="error-message">
+            Vendors could not load from Airtable. Check your Netlify environment variables, Airtable table name, Status field, and vendors.js function.
+          </div>
+        `;
+      }
+    }
+
+    heroSearch.addEventListener("input", () => {
+      vendorSearch.value = heroSearch.value;
+      renderVendors();
+    });
+
+    heroCategory.addEventListener("change", () => {
+      vendorCategoryFilter.value = heroCategory.value;
+      renderVendors();
+      document.getElementById("featured").scrollIntoView({ behavior: "smooth" });
+    });
+
+    vendorSearch.addEventListener("input", renderVendors);
+    vendorCategoryFilter.addEventListener("change", renderVendors);
+
+    populateCategoryFilters();
+    renderCategories();
+    loadVendors();
+  </script>
 </body>
 </html>
